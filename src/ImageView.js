@@ -740,7 +740,12 @@ export default class ImageView extends Component<PropsType, StateType> {
             >
                 <Animated.Image
                     resizeMode="cover"
-                    source={image.source}
+                    source={{
+                        uri: image.source.uri,
+                        headers: {
+                            Authorization: `Bearer ${image.source.token}`
+                        }
+                    }}
                     style={this.getImageStyle(image, index)}
                     onLoad={(): void => this.onImageLoaded(index)}
                     {...this.panResponder.panHandlers}
